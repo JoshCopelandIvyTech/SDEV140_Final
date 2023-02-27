@@ -1,0 +1,3 @@
+So far I have a basic code to download img files from a url to a folder.
+Next to do is work on getting rid of file extensions that may be at the end of a file's name and use the mime type from the response header for more consistent downloads.
+I also need to clean up the code in to functions or maybe a class with comments. Then I can start working on the GUI for it.
