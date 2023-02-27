@@ -14,7 +14,7 @@ url2 = "https://unsplash.com/s/photos/car"
 opener = build_opener()
 opener.addheaders = [('User-agent', 'Mozilla/5.0')]
 install_opener(opener)
-htmlData = urlopen(url)
+htmlData = urlopen(url2)
 # print(htmlReq, htmlData)
 soup = BeautifulSoup(htmlData, 'html.parser')
 # diagnose(soup)
@@ -53,17 +53,17 @@ for item in images:
         # print(name)
     
     if(imgType):
-        if not isfile(f"Final/img/{name}.{imgType}"):
+        if not isfile(f"../Final/img/{name}.{imgType}"):
             print("...")
-            img = open(f"Final/img/{name}.{imgType}", "wb")
+            img = open(f"../Final/img/{name}.{imgType}", "wb")
             img.write(imgData.read())
             img.close()
         else:
             fileCount = 1
-            while(isfile(f"Final/img/{name}{str(fileCount)}.{imgType}")):
+            while(isfile(f"../Final/img/{name}{str(fileCount)}.{imgType}")):
                 # print("???", fileCount)
                 fileCount+=1
-            img = open(f"Final/img/{name}{str(fileCount)}.{imgType}", "wb")
+            img = open(f"../Final/img/{name}{str(fileCount)}.{imgType}", "wb")
             img.write(imgData.read())
             img.close()
             print(fileCount)
