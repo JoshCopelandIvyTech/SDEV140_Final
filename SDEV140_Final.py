@@ -86,10 +86,29 @@ class URLwindow:
                 print(values["-URL-"])
 
 class ImgSelect:
+    imgTable = [['Rajeev', 23, 78],
+                ['Rajani', 21, 66],
+                ['Rahul', 22, 60],
+                ['Robin', 20, 75]]
+    tableHeadings = ["Name", "Size", "Resolution"]
     layout = [
-        [psg.Text("Enter URL to open "), psg.Input(key="-URL-"), psg.Open()]
+        [psg.Table(values=imgTable, headings= tableHeadings, auto_size_columns=True,enable_click_events=True,key="-Table-")],
+        [psg.Text("",key="-ImgSelect-"), psg.FileSaveAs(), psg.Button("View", key="-ImgView-")]
     ]  
+    window = psg.Window("Img Browser", layout, size=(550, 500), resizable=True)
+    def listen(self):
+        while True:
+            event, values = ImgSelect.window.read() 
+            print("event:", event, "values:", values)
+            if event == psg.WIN_CLOSED:
+                break
+            if "-Table-" in event:
+                print(">>>>", event[2][0])
+                ImgSelect.window["-ImgSelect-"].update(ImgSelect.imgTable[event[2][0]][0])
+
 
 # URL = URLwindow()
 # URL.listen()
+img = ImgSelect()
+img.listen()
 
