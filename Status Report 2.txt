@@ -1,3 +1,2 @@
-So far I have a basic code to download img files from a url to a folder.
-Next to do is work on getting rid of file extensions that may be at the end of a file's name and use the mime type from the response header for more consistent downloads.
-I also need to clean up the code in to functions or maybe a class with comments. Then I can start working on the GUI for it.
+This program is a simple website scraper that searches for html img tags on a website and downloads them from their src. It then stores them in memory for either viewing or saving to local storage. 
+So far I have the main logic for the web scraper done and most of the GUI logic done. I have a problem with the images sharing the same name in some situations, and the save as button not defaulting to the image’s name. So that needs to be worked on, along with finishing the save to local storage operation and some clean up.  
