@@ -242,9 +242,9 @@ class GUI(ImgScraper):
         #close window
         self.window.close()
 
-
-
+#creates instance of GUI class
 gui = GUI()
+#call for listen method from GUI class
 gui.listen()
 
 
