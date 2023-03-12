@@ -1,4 +1,7 @@
-#start of the final working on downloading imgs using beautifulSoup
+#Simpe website image scraper
+#Josh Copeland
+#3/11/23
+
 from urllib.request import urlopen, build_opener, install_opener
 from urllib.parse import urlparse
 from PIL import Image, ImageShow
@@ -80,7 +83,7 @@ class ImgScraper:
                     data = Image.open(urlopen(path))
                 # if URL is not vaild trys to add websit's base URL to the beginning of it
                 except(ValueError):
-                    print("<<<<")
+                    # print("<<<<")
                     path = ImgScraper.baseURL+'/'+item['src']
                     # print(path)
                     data = Image.open(urlopen(path))
@@ -115,7 +118,7 @@ class GUI(ImgScraper):
     
     # create a window object for inputing URL
     def URLwindow(self):
-        print("URLwind")
+        # print("URLwind")
         # a list that repersents window layout 
         layout = [
         [psg.Text("Enter URL to open "), # a lable element 
@@ -133,6 +136,9 @@ class GUI(ImgScraper):
     
     # create window object for selecting an img and choosing what to do with it
     def imgSelectWindow(self):
+        #sets a default image when loaded
+        self.fileName = super().imgTable[self.rowSelected][0] #gets name from select row 
+        self.fileType = super().imgTable[self.rowSelected][1] #gets file type from select row
         tableHeadings = ["Name", "Type", "Resolution"] # labels to be used for table columns
         layout = [
             # a table element to display imgTable data
@@ -154,12 +160,12 @@ class GUI(ImgScraper):
     
     # is call when an OPEN event is called. takes inputed URL and passes it to getImg then hides URL select window
     def openURL(self):
-        print(self.values["-URL-"])
+        # print(self.values["-URL-"])
         # try to open URL if it fails then bring up a popup with error message
         try:
             super().getImg(self.values["-URL-"])
         except(Exception) as er:
-            print(">>>>>>", er)
+            # print(">>>>>>", er)
             psg.popup(er)
         else:
             # check if imgTable is empty 
@@ -184,7 +190,7 @@ class GUI(ImgScraper):
     
     # is called when show button is pressed will show the img   
     def showImg(self):
-        print(self.rowSelected)
+        # print(self.rowSelected)
         # gets image object from imgDataList and shows using an image viewing app
         ImageShow.show(super().imgDataList[self.rowSelected][1])
  
@@ -196,7 +202,7 @@ class GUI(ImgScraper):
         if saveTest !='':
             #adds file extension to the end of file path
             saveTest+= f".{self.fileType}"
-            print(saveTest)
+            # print(saveTest)
             #saves the file to file path
             super().imgDataList[self.rowSelected][1].save(saveTest)
         
@@ -219,7 +225,7 @@ class GUI(ImgScraper):
         while True:
             #will ask all open windows if a any event is happening and returns a which window, event, and value of event element
             self.window, self.event, self.values = psg.read_all_windows() 
-            print(self.window, self.event, self.values)
+            # print(self.window, self.event, self.values)
             # if user closes a window call closeWindow
             if self.event == psg.WIN_CLOSED:
                 if self.closeWindow():
